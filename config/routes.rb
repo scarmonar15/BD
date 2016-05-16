@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
+  resources :assignments
 
+  get 'welcome/index'
+  get 'assignments/index/differences' => 'assignments#differences', as: :differences
   resources :projects
 
   # The priority is based upon order of creation: first created -> highest priority.
