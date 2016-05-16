@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :learnings
+
   resources :teams
 
   get 'welcome/index'
