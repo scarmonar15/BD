@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160516073913) do
+ActiveRecord::Schema.define(version: 20160516160426) do
 
   create_table "assignments", force: true do |t|
     t.date     "limit_date"
@@ -24,6 +24,12 @@ ActiveRecord::Schema.define(version: 20160516073913) do
   create_table "projects", force: true do |t|
     t.string   "title"
     t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "teams", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

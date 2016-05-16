@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :teams
+
   get 'welcome/index'
   resources :assignments
   resources :projects
