@@ -61,37 +61,37 @@ class AssignmentsController < ApplicationController
     end
   end
 
-  def differences
-    require 'net/http'
+  # def differences
+  #   require 'net/http'
 
-    # url = URI.parse("http://apimasalarms.herokuapp.com/assignments.json")
-    # http = Net::HTTP.new(url.host, url.port)
-    # request = Net::HTTP::Get.new(url.request_uri)
-    # http.use_ssl = true  
-    # res = http.request(request)
+  #   # url = URI.parse("http://apimasalarms.herokuapp.com/assignments.json")
+  #   # http = Net::HTTP.new(url.host, url.port)
+  #   # request = Net::HTTP::Get.new(url.request_uri)
+  #   # http.use_ssl = true  
+  #   # res = http.request(request)
 
-    url = URI.parse('http://apimasalarms.herokuapp.com/assignments.json')
-    req = Net::HTTP::Get.new(url.to_s)
-    res = Net::HTTP.start(url.host, url.port) {|http|
-      http.request(req)
-    }
-    api_assignments = JSON.parse(res.body)
-    db_assignments = JSON.parse(Assignment.all.to_json)
+  #   url = URI.parse('http://apimasalarms.herokuapp.com/assignments.json')
+  #   req = Net::HTTP::Get.new(url.to_s)
+  #   res = Net::HTTP.start(url.host, url.port) {|http|
+  #     http.request(req)
+  #   }
+  #   api_assignments = JSON.parse(res.body)
+  #   db_assignments = JSON.parse(Assignment.all.to_json)
 
-    result = []
-    api_names = []
-    db_names = []
+  #   result = []
+  #   api_names = []
+  #   db_names = []
     
-    api_assignments.map {|aa| api_names << aa["description"]}
-    db_assignments.map {|da| db_names << da["description"]}
+  #   api_assignments.map {|aa| api_names << aa["description"]}
+  #   db_assignments.map {|da| db_names << da["description"]}
 
-    api_names.each_with_index do |name, index|
-      unless db_names.include?(name)
-        result << {id: api_assignments[index]["id"]}
-      end
-    end
-    render json: result
-  end
+  #   api_names.each_with_index do |name, index|
+  #     unless db_names.include?(name)
+  #       result << {id: api_assignments[index]["id"]}
+  #     end
+  #   end
+  #   render json: result
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
