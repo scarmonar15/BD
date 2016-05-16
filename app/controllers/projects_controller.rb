@@ -60,34 +60,7 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-  def differences
-    require 'net/http'
-    url = URI.parse('http://apimasalarms.herokuapp.com/projects.json')
-    req = Net::HTTP::Get.new(url.to_s)
-    res = Net::HTTP.start(url.host, url.port) {|http|
-      http.request(req)
-    }
-    api_projects = JSON.parse(res.body)
-    bd_projects = JSON.parse(Project.all.to_json)
-    result = []
-    api_names = []
-    bd_names = []
-    
-    api_projects.map {|ae| api_names << ae["title"]}
-    bd_projects.map {|be| bd_names << be["title"]}
-
-    api_names.each_with_index do |name, index|
-      unless bd_names.include?(name)
-        result << api_projects[index]
-      end
-    end
-    render json: result
-    # result = api_projects - bd_projects
-    # puts "************************************** #{result}"
-
-  end
-
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
