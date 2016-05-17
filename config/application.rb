@@ -19,5 +19,17 @@ module DB
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+    config.action_dispatch.default_headers = {
+        'Access-Control-Allow-Origin' => '*',
+        'Access-Control-Request-Method' => 'GET, PATCH, PUT, POST, OPTIONS, DELETE'
+    }
+    config.middleware.insert_before 'Rack::Runtime', 'Rack::Cors' do
+      allow do
+        origins '*'
+        resource '*',
+                 headers: :any,
+                 methods: [:get, :put, :post, :patch, :delete, :options]
+      end
+    end
   end
 end
